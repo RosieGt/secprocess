@@ -1,0 +1,48 @@
+{% extends  'base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+<div class="row">
+  
+    <div class="col-md-7 offset-md-3">
+        <div class="card  auth-card">
+            <div class="card-body">
+                <h4 class="card-title text-center">Entrar em Secprocess</h4>
+        
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ next }}">
+        
+                    {{ form|crispy }}
+
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                    <br>
+                  
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

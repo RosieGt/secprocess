@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block title %}Lista de pedidos{% endblock %}
+
+{% block content %}
+<br>
+<div class="offset-1 col-10 list-div">
+    <h2>Solicitante:</h2>
+    <hr>
+    <br>
+    <p>Nome do Aluno:</p>
+    <h3>{{pedido.nome}}</h3>
+    <hr>
+    <p>Data de nacimento:</p>
+    <h3>{{pedido.dtNascimento}}</h3>
+    <hr>
+    <p>Nome da Mãe:</p>
+    <h3>{{pedido.nome_mae}}</h3>
+    <hr>
+    <p>Ano de conclusão:</p>
+    <h3>{{pedido.conclusao}}</h3>
+    <hr>
+    <p>Telefone para contato:</p>
+    <h3>{{pedido.nrTelCelular}}</h3>
+    <hr>
+    <p>Atendente:</p>
+    <h3>{{pedido.atendimento}}</h3>
+    <hr>
+    <p>Data do pedido:</p>
+    <h3>{{pedido.data_pedido}}</h3>
+    <hr>
+    <p>Observações:</p>
+    <h3>{{pedido.descricao}}</h3>
+    <hr>
+</div>
+<br>
+<br>
+
+{% endblock %}

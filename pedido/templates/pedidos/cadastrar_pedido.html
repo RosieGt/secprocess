@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+    {% block title %}Cadastrar Pedido{% endblock title %}
+    {% block content %}
+<div class="offset-1 col-10 list-div">
+    <h1>Pedido do Certificados/Transferências</h1>
+    <h2>Cadastrar pedido:</h2>
+
+    <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      Add Pedido
+    </button>
+    <a href="{% url 'listar_pedido' %}" class="btn btn-danger">Cancelar</a>
+    {% endbuttons %}
+    </form>
+</div>  
+    {% endblock content %}

@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Solicitante{% endblock title %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <h2>Pedido de Certificados/Transferências:</h2>
+    <div class="container dashboard">
+        <a id="add-link" href="{% url 'pedido_finalizado' %}">
+        <div class="col-4 dashboard-box" id="dashboard-done">
+           <h4>Pedidos finalizados:</h4>
+            <span>{{ pedidosdone }}</span> 
+        </div>
+        <div class="col-4 dashboard-box" id="dashboard-doing">
+            <h4>Pedidos em andamento:</h4>
+            <span>{{ pedidosdoing }}</span>
+        </div>
+    </div>
+    <a id="add-link" href="{% url 'cadastrar_pedido' %}">
+        <div class="col-2 add-div">
+            <i class="fas fa-plus"></i> Adicionar pedido
+        </div>
+    </a>
+    <div class="offset-1  col-10 search-div">
+        <form method="GET" id="search-form">
+           <input class="form-control" type="text" id="search" name="search" placeholder="Digite o nome do(a) aluno(a) para buscar..." value="{{ request.GET.search }}">
+           <div class="col-9 search-div">
+               <button type="submit" class="btn btn-success">Buscar</button>
+               <a href="{% url 'listar_pedido' %}" class="btn btn-light">Limpar</a>
+           </div>
+         </form>
+     </div>
+    <div class="offset-1 col-10 list-div">
+        <P>Nome dos alunos:</P>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <ul class="task-list">
+            {% for pedido in pedidos %}
+               {% if pedido.done == 'doing' %}
+                   <li class="task-item">
+                {% else %}    
+                    <li class="task-item done">
+                {% endif %}            
+                    <span><a href="/pedido/{{pedido.id}}">{{pedido.nome}}</a></span>
+                    <a href="/delete/{{pedido.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+                    <a href="/edit/{{pedido.id}}"><span><i class="fas fa-edit"></i></span></a>
+                    <a href="/changestatus/{{pedido.id}}"><i class="fas fa-check"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="pagination">
+            <span class="step-links">
+                {% if pedidos.has_previous %}
+                    <a href="?page={{ pedidos.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+                {% endif %}
+                
+                {% if pedidos.paginator.num_pages %}
+                <span class="current">
+                    {{ pedidos.number }} de {{ pedidos.paginator.num_pages }}
+                </span>
+                {% endif %}
+            
+                {% if pedidos.has_next %}
+                    <a href="?page={{ pedidos.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+                {% endif %}
+            </span>
+        </div>
+    </div>    
+</div>
+
+
+
+{% endblock %}

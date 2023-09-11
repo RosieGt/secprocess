@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+    {% block title %}Atualizar pedido{% endblock title %}
+    {% block content %}
+    <div class="offset-1 col-10 list-div">
+        <h1>Atualizar pedido do(a) Certificado/Transferência:</h1>
+        <br>
+        <h2>{{ form.instance.pedido}}</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary">
+         Atualizar
+         </button>
+         <a href="{% url 'listar_pedido' %}" class="btn btn-danger">Cancelar</a>
+         {% endbuttons %}
+        </form>
+    </div>    
+    {% endblock content %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Solicitante{% endblock title %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <P>Nome dos alunos:</P>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <ul class="task-list">
+        {% for pedido in pedidos %}
+           {% if pedido.done %}
+               <li class="task-item">
+            {% endif %}            
+                <span><a href="/pedido/{{pedido.done}}">{{pedido.nome}}</a></span>
+                <a href="/delete/{{pedido.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
+                <a href="/edit/{{pedido.id}}"><span><i class="fas fa-edit"></i></span></a>
+                <a href="/changestatus/{{pedido.id}}"><i class="fas fa-check"></i></a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if pedidos.has_previous %}
+                <a href="?page={{ pedidos.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
+            {% endif %}
+            
+            {% if pedidos.paginator.num_pages %}
+            <span class="current">
+                {{ pedidos.number }} de {{ pedidos.paginator.num_pages }}
+            </span>
+            {% endif %}
+        
+            {% if pedidos.has_next %}
+                <a href="?page={{ pedidos.next_page_number }}"><i class="fas fa-arrow-right"></i></a>
+            {% endif %}
+        </span>
+    </div>
+</div>    
+</div>
+{% endblock %}
