@@ -100,19 +100,19 @@ def changeStatus(request, id):
 def pedido_finalizado(request):
     search = request.GET.get('search')
     
-    filter = request.GET.get('filter')
-    pedidosDone = Pedido.objects.filter(done='done')
+    # filter = request.GET.get('filter')
+    #pedidosDone = Pedido.objects.filter(done='done')
    
    
     if search:
         
         pedidos = Pedido.objects.filter(nome__icontains=search)
     
-    elif filter:
-        pedidoss = Pedido.objects.filter(done=filter)
+    #elif filter:
+       # pedidos = Pedido.objects.filter(done=filter)
         
     else:
-        pedido_list = Pedido.objects.filter(done=filter).order_by('-created_at')
+        pedido_list = Pedido.objects.filter(done='doing').order_by('-created_at')
     
         paginator = Paginator(pedido_list, 10)
     
@@ -121,5 +121,5 @@ def pedido_finalizado(request):
         pedidos = paginator.get_page(page)
       
     return render(request, 'pedidos/pedido_finalizado.html', 
-                  {'pedidos' : pedidos, 'pedidosdone': pedidosDone})
+                  {'pedidos' : pedidos})
    
